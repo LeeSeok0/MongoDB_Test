@@ -70,15 +70,17 @@ public class TestService {
                         random.nextFloat() * 100,  // bi_negative_kwh
                         random.nextFloat() * 100,  // bi_net_kwh
                         random.nextFloat() * 100,   // bi_total_kwh
-                        "d"+i
+                        "",
+                        null
                 );
                 testEntityRepository.insert(entity);
-                Thread.sleep(1);
+                //Thread.sleep(1);
                 int num = 1000000;
                 if(i == num || i == num*2 || i == num*3 || i == num*4
                           || i == num*5 || i == num*6 || i == num*7
                           || i == num*8 || i == num*9 ){
                     System.out.println("inserted..........."+i);
+                    System.out.println(LocalDateTime.now());
                 }
 //                long endTime = System.currentTimeMillis();
 //                long total = endTime - startTime;
@@ -144,12 +146,10 @@ public class TestService {
                     random.nextFloat() * 100,  // bi_negative_kwh
                     random.nextFloat() * 100,  // bi_net_kwh
                     random.nextFloat() * 100,   // bi_total_kwh
-                    "test60000000"+i
+                    "test",
+                    LocalDateTime.of(2024, 8, 7, 12, 0,i)
             );
             testEntityRepository.save(entity);
-            long endTime = System.currentTimeMillis();
-            long total = endTime - startTime;
-            System.out.println("milli seconds : " +  total);
         }
             long endTime = System.currentTimeMillis();
             long total = endTime - startTime;
@@ -159,7 +159,9 @@ public class TestService {
 
     public void selectEntity() {
         long startTime = System.currentTimeMillis(); // milliseconds 단위
-        List<TestEntity> selectResults = testEntityRepository.findAllByTestIdIsContaining("test");
+        LocalDateTime startDateTime = LocalDateTime.of(2024,8,7,12,0,0);
+        LocalDateTime endDateTime = LocalDateTime.of(2024,8,7,12,1,0);
+        List<TestEntity> selectResults = testEntityRepository.findAllByDateTimeRange(startDateTime,endDateTime);
         long endTime = System.currentTimeMillis();
         long total = endTime - startTime;
         System.out.println("milli seconds : " +  total);
@@ -168,9 +170,12 @@ public class TestService {
 
     public void deleteEntity(){
         long startTime = System.currentTimeMillis();
-        testEntityRepository.deleteAllByTestIdIsContaining("test");
+        LocalDateTime startDateTime = LocalDateTime.of(2024,8,7,12,0,0);
+        LocalDateTime endDateTime = LocalDateTime.of(2024,8,7,12,1,0);
+        testEntityRepository.deleteAllByDateTime(startDateTime,endDateTime);
         long endTime = System.currentTimeMillis();
         long total = endTime - startTime;
+        System.out.println("delete complete.....");
         System.out.println("milli seconds : " +  total);
     }
 

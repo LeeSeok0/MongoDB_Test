@@ -1,11 +1,9 @@
 package com.example.documentdb;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Data
 @Document(collection = "testCollection")
@@ -57,7 +55,8 @@ public class TestEntity {
     private float bi_negative_kwh;
     private float bi_net_kwh;
     private float bi_total_kwh;
-    private String testId;
+    private String testString;
+    private LocalDateTime dateTime;
 
     public TestEntity(float v_a, float i_a, float kw_a, float kvar_a, float kva_a, float pf_a, float kwh_a,
                       float kvarh_a, float kvah_a, float v_b, float i_b, float kw_b, float kvar_b, float kva_b,
@@ -66,7 +65,7 @@ public class TestEntity {
                       float i_avg, float kw_tot, float kvar_tot, float kva_tot, float pf_tot, float kwh_tot,
                       float kvarh_tot, float kvah_tot, float freq_a, float freq_b, float freq_c, float freq_max,
                       float vthd, float ithd, float bi_positive_kwh, float bi_negative_kwh, float bi_net_kwh,
-                      float bi_total_kwh,String testId){
+                      float bi_total_kwh,String testString,LocalDateTime dateTime){
         this.v_a = v_a;
         this.i_a = i_a;
         this.kw_a = kw_a;
@@ -113,6 +112,7 @@ public class TestEntity {
         this.bi_negative_kwh = bi_negative_kwh;
         this.bi_net_kwh = bi_net_kwh;
         this.bi_total_kwh = bi_total_kwh;
-        this.testId = testId;
+        this.testString = testString;
+        this.dateTime = dateTime;
     }
 }

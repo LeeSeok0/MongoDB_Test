@@ -27,7 +27,7 @@ public class TestController {
 
     @PostMapping("/insert")
     public String insert() {
-        testService.insertEntity(100);
+        testService.insertEntity(60);
         return "redirect:/";
     }
     @PostMapping("/select")
